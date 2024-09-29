@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 851176879623662720}
   - component: {fileID: 7424746916786808655}
   - component: {fileID: 7934218600478141160}
+  - component: {fileID: -2917942650057686559}
   m_Layer: 0
   m_Name: DropBall
   m_TagString: Untagged
@@ -148,3 +149,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-2917942650057686559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8334032000242259248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740498faac49741f497ff02fa5e7162c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
