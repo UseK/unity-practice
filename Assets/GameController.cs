@@ -6,10 +6,11 @@ public class GameController : MonoBehaviour
 {
     public SpriteRenderer aimBall;
     public GameObject dropBall;
+    public int dropBallCount;
     // Start is called before the first frame update
     void Start()
     {
-
+        dropBallCount = 1;
     }
 
     // Update is called once per frame
@@ -32,6 +33,8 @@ public class GameController : MonoBehaviour
     public void DoDropBall()
     {
         var ball = Instantiate(dropBall);
+        ball.GetComponent<BallController>().ballId = dropBallCount;
+        dropBallCount++;
         var x = aimBall.transform.position.x;
         var y = aimBall.transform.position.y;
         ball.transform.position = new Vector2(x, y);

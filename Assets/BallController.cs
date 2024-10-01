@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
+    public int ballId;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,11 @@ public class BallController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Collision!");
-        Debug.Log(collision);
+        BallController collisionController = collision.gameObject.GetComponent<BallController>();
+        if (collisionController != null && collisionController.ballId < ballId)
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     void OnMouseDown()
