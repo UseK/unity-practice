@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        aimBall.transform.position += new Vector3(Input.GetAxis("Horizontal") * 0.001f, 0.0f, 0.0f);
     }
 
     public void MoveLeft()
@@ -35,7 +35,5 @@ public class GameController : MonoBehaviour
         var x = aimBall.transform.position.x;
         var y = aimBall.transform.position.y;
         ball.transform.position = new Vector2(x, y);
-
-
     }
 }
