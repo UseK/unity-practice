@@ -1,15 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
+    ReadOnlyCollection<Color> BALL_COLORS = Array.AsReadOnly(
+        new Color[] {
+             Color.black,
+             Color.white,
+             Color.gray,
+             Color.blue,
+             Color.cyan,
+             Color.green,
+             Color.yellow,
+             Color.red,
+        });
     public int ballId;
     public int ballSize;
     // Start is called before the first frame update
     void Start()
     {
         Debug.LogFormat("BallController {0} Start!", ballId);
+        RerenderBall();
     }
 
     // Update is called once per frame
@@ -33,10 +47,16 @@ public class BallController : MonoBehaviour
             Debug.LogFormat("Same Size Ball {0} Collision!", ballSize);
             Debug.LogFormat("Distance {0}", Vector2.Distance(collisionController.transform.position, transform.position));
             ballSize += 1;
-            gameObject.transform.localScale = new Vector3(ballSize * 1.0f, ballSize * 1.0f, 0);
+            RerenderBall();
             Debug.LogFormat("radius ", gameObject.GetComponent<CircleCollider2D>().radius);
             Destroy(collision.gameObject);
         }
+    }
+
+    void RerenderBall() {
+        gameObject.transform.localScale = new Vector3(ballSize * 0.5f, ballSize * 0.5f, 0);
+        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+        renderer.color = BALL_COLORS[ballSize];
     }
 
     void OnMouseDown()
