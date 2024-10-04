@@ -32,8 +32,11 @@ public class GameController : MonoBehaviour
 
     public void DoDropBall()
     {
+        Debug.Log("Start dropBall Instantiate!");
         var ball = Instantiate(dropBall);
+        Debug.Log("End dropBall Instantiate!");
         ball.GetComponent<BallController>().ballId = dropBallCount;
+        ball.GetComponent<BallController>().ballSize = 1;
         dropBallCount++;
         var x = aimBall.transform.position.x;
         var y = aimBall.transform.position.y;
