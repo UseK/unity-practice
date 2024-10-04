@@ -31,8 +31,10 @@ public class BallController : MonoBehaviour
         && collisionController.ballSize == ballSize)
         {
             Debug.LogFormat("Same Size Ball {0} Collision!", ballSize);
+            Debug.LogFormat("Distance {0}", Vector2.Distance(collisionController.transform.position, transform.position));
             ballSize += 1;
             gameObject.transform.localScale = new Vector3(ballSize * 1.0f, ballSize * 1.0f, 0);
+            Debug.LogFormat("radius ", gameObject.GetComponent<CircleCollider2D>().radius);
             Destroy(collision.gameObject);
         }
     }
