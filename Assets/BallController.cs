@@ -46,6 +46,10 @@ public class BallController : MonoBehaviour
         {
             Debug.LogFormat("Same Size Ball {0} Collision!", ballSize);
             Debug.LogFormat("Distance {0}", Vector2.Distance(collisionController.transform.position, transform.position));
+            GameController game = FindObjectOfType<GameController>();
+            game.score += ballSize;
+            game.RenderScore();
+            Debug.LogFormat("Score: {0}", game.score);
             ballSize += 1;
             RerenderBall();
             Debug.LogFormat("radius ", gameObject.GetComponent<CircleCollider2D>().radius);

@@ -1,22 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
     public SpriteRenderer aimBall;
     public GameObject dropBall;
     public int dropBallCount;
+
+    public int score;
+    public TMP_Text scoreText;
     // Start is called before the first frame update
     void Start()
     {
         dropBallCount = 1;
+        score = 0;
+        RenderScore();
     }
 
     // Update is called once per frame
     void Update()
     {
         aimBall.transform.position += new Vector3(Input.GetAxis("Horizontal") * 0.001f, 0.0f, 0.0f);
+    }
+
+    public void RenderScore()
+    {
+        scoreText.text = "Score: " + score.ToString();
     }
 
     public void MoveLeft()
