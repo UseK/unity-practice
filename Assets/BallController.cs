@@ -47,7 +47,7 @@ public class BallController : MonoBehaviour
             Debug.LogFormat("Same Size Ball {0} Collision!", ballSize);
             Debug.LogFormat("Distance {0}", Vector2.Distance(collisionController.transform.position, transform.position));
             GameController game = FindObjectOfType<GameController>();
-            game.score += ballSize;
+            game.score += PowerOf10(ballSize);
             game.RenderScore();
             Debug.LogFormat("Score: {0}", game.score);
             ballSize += 1;
@@ -57,7 +57,15 @@ public class BallController : MonoBehaviour
         }
     }
 
-    void RerenderBall() {
+    int PowerOf10(int p)
+    {
+        int result = 1;
+        for (int i = 0; i < p; i++) { result *= 10; }
+        return result;
+    }
+
+    void RerenderBall()
+    {
         gameObject.transform.localScale = new Vector3(ballSize * 0.5f, ballSize * 0.5f, 0);
         SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
         renderer.color = BALL_COLORS[ballSize];
