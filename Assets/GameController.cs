@@ -5,7 +5,8 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    public SpriteRenderer aimBall;
+    public GameObject aimBall;
+    public int aimBallSize;
     public GameObject dropBall;
     public int dropBallCount;
 
@@ -17,6 +18,7 @@ public class GameController : MonoBehaviour
         dropBallCount = 1;
         score = 0;
         RenderScore();
+        NextAimBall();
     }
 
     // Update is called once per frame
@@ -47,10 +49,16 @@ public class GameController : MonoBehaviour
         var ball = Instantiate(dropBall);
         Debug.Log("End dropBall Instantiate!");
         ball.GetComponent<BallController>().ballId = dropBallCount;
-        ball.GetComponent<BallController>().ballSize = 1;
+        ball.GetComponent<BallController>().ballSize = aimBallSize;
         dropBallCount++;
         var x = aimBall.transform.position.x;
         var y = aimBall.transform.position.y;
         ball.transform.position = new Vector2(x, y);
+        NextAimBall();
+    }
+
+    void NextAimBall() {
+        aimBallSize = Random.Range(1, BallRenderer.MAX_BALL_COLORS / 2);
+        BallRenderer.RerenderBall(aimBall, aimBallSize);
     }
 }

@@ -6,24 +6,13 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    ReadOnlyCollection<Color> BALL_COLORS = Array.AsReadOnly(
-        new Color[] {
-             Color.black,
-             Color.white,
-             Color.gray,
-             Color.blue,
-             Color.cyan,
-             Color.green,
-             Color.yellow,
-             Color.red,
-        });
     public int ballId;
     public int ballSize;
     // Start is called before the first frame update
     void Start()
     {
         Debug.LogFormat("BallController {0} Start!", ballId);
-        RerenderBall();
+        BallRenderer.RerenderBall(gameObject, ballSize);
     }
 
     // Update is called once per frame
@@ -39,6 +28,9 @@ public class BallController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("GameOver")) {
+            Debug.Log("Gave Over!!");
+        };
         BallController collisionController = collision.gameObject.GetComponent<BallController>();
         if (collisionController != null
         && collisionController.ballId < ballId
@@ -51,7 +43,7 @@ public class BallController : MonoBehaviour
             game.RenderScore();
             Debug.LogFormat("Score: {0}", game.score);
             ballSize += 1;
-            RerenderBall();
+            BallRenderer.RerenderBall(gameObject, ballSize);
             Debug.LogFormat("radius ", gameObject.GetComponent<CircleCollider2D>().radius);
             Destroy(collision.gameObject);
         }
@@ -62,13 +54,6 @@ public class BallController : MonoBehaviour
         int result = 1;
         for (int i = 0; i < p; i++) { result *= 10; }
         return result;
-    }
-
-    void RerenderBall()
-    {
-        gameObject.transform.localScale = new Vector3(ballSize * 0.5f, ballSize * 0.5f, 0);
-        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
-        renderer.color = BALL_COLORS[ballSize];
     }
 
     void OnMouseDown()
